@@ -4,7 +4,7 @@ import {beforeEach} from "node:test";
 
 
 test.describe.serial("Perform E2E Test", async()=>{
-     test("Create products", async ({ request }) => {
+    test("Create products", async ({ request }) => {
         const payload = ProductRequest();
         const createRequest = await request.post("/products", {
             data: payload.validProductData,
