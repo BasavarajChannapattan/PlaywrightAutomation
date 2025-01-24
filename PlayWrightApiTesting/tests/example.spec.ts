@@ -1,18 +1,23 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import * as dotenv from "dotenv";
+dotenv.config(); //
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe("booking/summary?roomid={id}", async () => {
+  test("GET booking summary with specific room id", async ({ request }) => {
+    const response = await request.get("booking/summary?roomid=1");
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.bookings.length).toBeGreaterThanOrEqual(1);
+    expect(isValidDate(body.bookings[0].bookingDates.checkin)).toBe(true);
+    expect(isValidDate(body.bookings[0].bookingDates.checkout)).toBe(true);
+  });
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+export function isValidDate(date: string) {
+  if (Date.parse(date)) {
+    return true;
+  } else {
+    return false;
+  }
+}
