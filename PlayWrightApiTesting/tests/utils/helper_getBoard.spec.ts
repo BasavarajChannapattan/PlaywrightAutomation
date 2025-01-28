@@ -11,7 +11,7 @@ export interface Board{
     [key:string]:any;
 }
 
-export async function getAllBoards(request:APIRequestContext): Promise<Board[]> {
+export async function getAllBoards(request:APIRequestContext): Promise<Board> {
     const response = await request.get(`${API_BASE}/members/me/boards`, {
         params: {
             key: process.env.TRELLO_KEY as string,
