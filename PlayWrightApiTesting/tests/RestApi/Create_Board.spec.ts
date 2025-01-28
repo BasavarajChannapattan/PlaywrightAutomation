@@ -1,13 +1,13 @@
 import {test, expect, APIRequestContext} from "@playwright/test";
-import {CreateBoard} from "./utils/helper_CreateBoard.spec";
-import {getSingleBoard} from "./utils/helper_getBoard.spec";
-import {DeleteBoard} from "./utils/helper_DeleteBoard.spec";
+import {CreateBoard} from "../utils/helper_CreateBoard.spec";
+import {getSingleBoard} from "../utils/helper_getBoard.spec";
+import {DeleteBoard} from "../utils/helper_DeleteBoard.spec";
 
 
 test.describe("create_board", async () => {
-    let boardId;
+    let boardId: string;
     test.beforeAll("Create Board in Trello", async ({request}) => {
-        const boardName= "Test Board " + Date.now();
+        const boardName= "Testing" + Date.now();
         const createBoard= await CreateBoard(request, boardName);
 
         expect(createBoard).toHaveProperty("id");
@@ -22,8 +22,9 @@ test.describe("create_board", async () => {
         expect(singleBoards).toHaveProperty("id", boardId)
     })
 
-    test("Delete board", async ({request}) => {
+    test("Delete board", async ({request}:{request:APIRequestContext}) => {
        const deleteBoard= await DeleteBoard(request, boardId);
        expect(deleteBoard).toHaveProperty("_value", null);
     })
+
 })

@@ -12,7 +12,7 @@ export async function CreateBoard(request: APIRequestContext, boardName: string)
     });
 
     if (!response.ok()) {
-        throw new Error(`Failed to create board: ${response.status()}`);
+        throw new Error(`Failed to create board: ${await response.text()}`);
     }
     return response.json();
 }
