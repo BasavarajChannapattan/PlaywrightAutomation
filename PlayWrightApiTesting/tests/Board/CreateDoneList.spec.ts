@@ -1,12 +1,11 @@
 import {test, expect, APIRequestContext} from "@playwright/test";
-import {CreateBoard} from "../utils/helper_CreateBoard.spec";
-import {getSingleBoard} from "../utils/helper_getBoard.spec";
-import {DeleteBoard} from "../utils/helper_DeleteBoard.spec";
+import {CreateBoard} from "../utils/helper_Post_Trello.spec";
+import {getSingleBoard} from "../utils/helper_getTrello.spec";
+import {DeleteBoard} from "../utils/helper_DeleteTrello.spec";
 import {createToDoList} from "../utils/helper_TodoBoard.spec";
-import exp = require("node:constants");
 
+let boardId;
 test.describe("Create TodoList", async () => {
-    let boardId;
     test.beforeAll("Create Board in Trello", async ({request}) => {
         const boardName = "Basava" + Date.now();
         const createBoard = await CreateBoard(request, boardName);
@@ -25,13 +24,12 @@ test.describe("Create TodoList", async () => {
     })
 
     test("It should create the Todo list for the current board", async ({request}: { request: APIRequestContext; }) => {
-        const createTodlist = await createToDoList(request, boardId, "TODO");
+        const createTodlist = await createToDoList(request, boardId, "DONE");
 
         expect(createTodlist).toHaveProperty("id");
         expect(createTodlist).toHaveProperty("name");
         expect(createTodlist).toHaveProperty("idBoard");
     });
-
 
     test("Delete board", async ({request}:{request:APIRequestContext}) => {
         const deleteBoard= await DeleteBoard(request, boardId);

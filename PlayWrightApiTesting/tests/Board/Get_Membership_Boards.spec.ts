@@ -1,5 +1,5 @@
 import {test, expect, APIRequestContext} from "@playwright/test";
-import {getAllBoards, getSingleBoard} from "../utils/helper_getBoard.spec";
+import {getAllBoards, getSingleBoard} from "../utils/helper_getTrello.spec";
 
 test.describe("get_membership_Boards", () => {
     let userId:string;

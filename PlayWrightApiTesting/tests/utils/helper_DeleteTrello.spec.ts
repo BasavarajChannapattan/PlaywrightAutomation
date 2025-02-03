@@ -14,3 +14,16 @@ export async function DeleteBoard(request:APIRequestContext, boardId: string): P
     return response.json();
 
 }
+
+export async function DeleteCard(request:APIRequestContext, cardId: string): Promise<void> {
+    const response = await request.delete(API_BASE + "/cards/" + cardId,{
+        params:getTrelloParams(),
+        headers:trelloHeaders
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to delete card: ${response.status()}`);
+    }
+
+    return response.json();
+}
