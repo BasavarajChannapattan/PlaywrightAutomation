@@ -1,5 +1,5 @@
 import{APIRequestContext} from "@playwright/test";
-import {Board} from "./helper_CreateBoard.spec";
+import {Board} from "./helper_Post_Trello.spec";
 import {request} from "node:http";
 import {API_BASE, getTrelloParams, trelloHeaders} from "./helper_Common.spec";
 

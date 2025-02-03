@@ -1,7 +1,7 @@
 import {test, expect, APIRequestContext} from "@playwright/test";
-import {CreateBoard} from "../utils/helper_CreateBoard.spec";
-import {getSingleBoard} from "../utils/helper_getBoard.spec";
-import {DeleteBoard} from "../utils/helper_DeleteBoard.spec";
+import {CreateBoard} from "../utils/helper_Post_Trello.spec";
+import {getSingleBoard} from "../utils/helper_getTrello.spec";
+import {DeleteBoard} from "../utils/helper_DeleteTrello.spec";
 
 
 test.describe("create_board", async () => {
